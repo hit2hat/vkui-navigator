@@ -1,0 +1,29 @@
+{
+  "name": "vkui-navigator",
+  "version": "1.0.1",
+  "description": "navigation module for vkui",
+  "main": "src/index.js",
+  "repository": "https://github.com/hit2hat/vkui-navigator.git",
+  "author": "hit2hat <hit2hat@icloud.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-react": "^7.6.3",
+    "@vkontakte/icons": "^1.10.2",
+    "@vkontakte/vk-connect": "^1.6.5",
+    "@vkontakte/vkui": "^2.31.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.10.2",
+    "rollup": "^1.23.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-uglify-es": "^0.0.1"
+  },
+  "scripts": {
+    "build": "rollup -c -o dist/index.js"
+  }
+}
