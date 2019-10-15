@@ -68,7 +68,7 @@ class Page extends React.Component {
 			vkConnect.send("VKWebAppEnableSwipeBack", {});
 		}
 
-		window.history.pushState({ panel: newPanel }, newPanel);
+		window.history.pushState({ panel: newPanel, modal: null }, newPanel);
 		this.setState({
 			activePanel: newPanel,
 			history: [ ...history, newPanel ],
@@ -83,28 +83,43 @@ class Page extends React.Component {
 		Функция возврата на предыдущую панель
 	 */
 	goBack(isPop) {
-		const { history, popout, homePanel } = this.state;
+		const { history, popout, activeModal, homePanel } = this.state;
 
-		if (history.length === 1) return null;
 		if (popout !== null) {
 			if (isPop) {
-				return this.setState({
+				this.setState({
 					popout: null
 				});
+				return;
 			}
 		}
+
+		if (activeModal !== null) {
+			if (isPop) {
+				this.setState({
+					activeModal: null,
+					modalHistory: [],
+					modalParams: {}
+				});
+				return
+			}
+		}
+
+		if (history.length === 1) return null;
 
 		const newPanel = history[history.length - 2];
 		if (newPanel === homePanel) {
 			vkConnect.send("VKWebAppDisableSwipeBack", {});
+		} else {
+			window.history.pushState({ panel: newPanel, modal: null  }, newPanel);
 		}
 
-		window.history.pushState({ panel: newPanel  }, newPanel);
 		this.setState({
 			activePanel: newPanel,
 			history: history.slice(0, history.length - 1),
 			popout: null,
 			activeModal: null,
+			modalHistory: [],
 			modalParams: {},
 		});
 	}
@@ -157,7 +172,10 @@ class Page extends React.Component {
 			@newModal - название нового модального окна
 	 */
 	showModal(newModal, params={}) {
-		const { modalHistory } = this.state;
+		const { modalHistory, activePanel } = this.state;
+
+		vkConnect.send("VKWebAppDisableSwipeBack", {});
+		window.history.pushState({ panel: activePanel, modal: newModal }, activePanel);
 
 		this.setState({
 			activeModal: newModal,
@@ -172,6 +190,12 @@ class Page extends React.Component {
 		Функция, которая скрывает все модальные окна
 	 */
 	hideModal() {
+		const { activePanel, homePanel } = this.state;
+
+		if (activePanel !== homePanel) {
+			vkConnect.send("VKWebAppEnableSwipeBack", {});
+		}
+
 		this.setState({
 			activeModal: null,
 			modalHistory: []
