@@ -34,7 +34,7 @@ class Page extends React.Component {
 			goPage: this.goPage,
 			goBack: window.history.back.bind(window.history),
 			showModal: this.showModal,
-			hideModal: () => window.history.back,
+			hideModal: window.history.back.bind(window.history),
 			showPopout: this.showPopout,
 			showLoader: this.showLoader,
 			hideLoader: this.hideLoader,
