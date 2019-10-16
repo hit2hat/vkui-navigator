@@ -21,12 +21,14 @@
 
 ## Быстрый старт 🚀
 ```javascript
-import { Page } from "vkui-navigator/dist";
+import { Stack, Page } from "vkui-navigator/dist";
 
 // simple usage
-<Page id="page1" homePanel="welcome">
-    <Welcome id="welcome"/>
-</Page>
+<Stack activePage="page1">
+    <Page id="page1" activePanel="welcome">
+        <Welcome id="welcome"/>
+    </Page>
+</Stack>
 ```
 
 ## Принцип работы
@@ -36,6 +38,16 @@ import { Page } from "vkui-navigator/dist";
 есть поддержка модальных окон и попапов
 
 ## API Справочник
+### <a id="stack" name="stack"></a>  Stack
+
+▸ Корневой элемент навигации
+
+**Props:**
+
+Название | Тип | Описание |
+------ | ------ | ------ |
+`activePage` | string, required | Идентификатор активной страницы |
+`modals` | array of node | Массив модальных окон |
 ___
 ### <a id="page" name="page"></a>  Page
 
@@ -46,9 +58,7 @@ ___
 Название | Тип | Описание |
 ------ | ------ | ------ |
 `id` | string, required | Идентификатор, который передается View внутри компонента |
-`homePanel` | string | Идентификатор начальной панели |
-`modals` | array | Массив модальных окон  |
-`goView` | func | Коллбек, который вызывается из панелей для смены текущего View(Page) на верхнем порядке
+`activePanel` | string | Идентификатор начальной панели |
 ___
 ### <a id="navigator" name="navigator"></a>  Navigator
 
@@ -59,7 +69,7 @@ ___
 Название | Тип | Описание |
 ------ | ------ | ------ |
 `go(id:String, params={})` | func | Переход на панель с идентификатором `id`|
-`goView(id:String)` | func | Вызывает коллбек, который передался в Page |
+`goPage(id:String)` | func | Переходит на другу страницу Page (из Stack) |
 `goBack` | func | Возвращает на одну панель назад  |
 `showModal(id:String, params={})` | func | Показывает модальное окно с идентификатором `id`|
 `hideModal` | func | Скрывает все активные модальные окна |
@@ -99,10 +109,12 @@ const Panel2 = ({ id, navigator }) => (
     </Panel>
 );
 
-<Page homePanel="panel1">
-    <Panel1 id="panel1"/>
-    <Panel2 id="panel2"/>
-</Page>
+<Stack activePage="page1">
+    <Page id="page1" activePanel="panel1">
+        <Panel1 id="panel1"/>
+        <Panel2 id="panel2"/>
+    </Page>
+</Stack>
 ```
 
 ## Авторы 🎨

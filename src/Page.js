@@ -6,34 +6,22 @@ import View from "@vkontakte/vkui/dist/components/View/View";
 import ScreenSpinner from "@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner";
 import Alert from "@vkontakte/vkui/dist/components/Alert/Alert";
 
-import ModalRoot from "@vkontakte/vkui/dist/components/ModalRoot/ModalRoot";
-import ModalPageHeader from "@vkontakte/vkui/dist/components/ModalPageHeader/ModalPageHeader";
-import HeaderButton from "@vkontakte/vkui/dist/components/HeaderButton/HeaderButton";
-
-import { withPlatform, ANDROID, IOS } from "@vkontakte/vkui";
-import Icon24Cancel from "@vkontakte/icons/dist/24/cancel";
-import Icon24Dismiss from "@vkontakte/icons/dist/24/dismiss";
-
 class Page extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			activePanel: props.homePanel,
-			homePanel: props.homePanel,
-			history: [ props.homePanel ],
+			activePanel: props.activePanel,
+			homePanel: props.activePanel,
+			history: [ props.activePanel ],
 			popout: null,
-			activeModal: null,
-			modalHistory: [],
-			params: {},
-			modalParams: {}
+			params: {}
 		};
 
-		this.popBack = this.popBack.bind(this);
 
 		this.go = this.go.bind(this);
-		this.goView = this.props.goView;
-		this.goBack = this.goBack.bind(this);
+		this.goPage = this.props.goPage;
+		this.popBack = this.popBack.bind(this);
 		this.showModal = this.showModal.bind(this);
 		this.hideModal = this.hideModal.bind(this);
 		this.showPopout = this.showPopout.bind(this);
@@ -43,10 +31,10 @@ class Page extends React.Component {
 
 		this.navigatorObject = {
 			go: this.go,
-			goView: this.goView,
-			goBack: this.goBack,
+			goPage: this.goPage,
+			goBack: window.history.back.bind(window.history),
 			showModal: this.showModal,
-			hideModal: this.hideModal,
+			hideModal: () => window.history.back,
 			showPopout: this.showPopout,
 			showLoader: this.showLoader,
 			hideLoader: this.hideLoader,
@@ -82,27 +70,21 @@ class Page extends React.Component {
 	/*
 		Функция возврата на предыдущую панель
 	 */
-	goBack(isPop) {
-		const { history, popout, activeModal, homePanel } = this.state;
+	popBack() {
+		const { history, popout, homePanel } = this.state;
+		const { isModalOpen } = this.props;
+		const { hideModal } = this;
 
 		if (popout !== null) {
-			if (isPop) {
-				this.setState({
-					popout: null
-				});
-				return;
-			}
+			this.setState({
+				popout: null
+			});
+			return;
 		}
 
-		if (activeModal !== null) {
-			if (isPop) {
-				this.setState({
-					activeModal: null,
-					modalHistory: [],
-					modalParams: {}
-				});
-				return
-			}
+		if (isModalOpen) {
+			hideModal();
+			return;
 		}
 
 		if (history.length === 1) return null;
@@ -110,8 +92,6 @@ class Page extends React.Component {
 		const newPanel = history[history.length - 2];
 		if (newPanel === homePanel) {
 			vkConnect.send("VKWebAppDisableSwipeBack", {});
-		} else {
-			window.history.pushState({ panel: newPanel, modal: null  }, newPanel);
 		}
 
 		this.setState({
@@ -172,73 +152,27 @@ class Page extends React.Component {
 			@newModal - название нового модального окна
 	 */
 	showModal(newModal, params={}) {
-		const { modalHistory, activePanel } = this.state;
+		const { showModal } = this.props;
+		const { activePanel } = this.state;
 
 		vkConnect.send("VKWebAppDisableSwipeBack", {});
 		window.history.pushState({ panel: activePanel, modal: newModal }, activePanel);
 
-		this.setState({
-			activeModal: newModal,
-			modalHistory: modalHistory.indexOf(newModal) !== -1
-				? modalHistory.splice(0, modalHistory.indexOf(newModal) + 1)
-				: [ ...modalHistory, newModal ],
-			modalParams: params
-		});
+		showModal(newModal, params);
 	}
 
 	/*
 		Функция, которая скрывает все модальные окна
 	 */
 	hideModal() {
+		const { hideModal } = this.props;
 		const { activePanel, homePanel } = this.state;
 
 		if (activePanel !== homePanel) {
 			vkConnect.send("VKWebAppEnableSwipeBack", {});
 		}
 
-		this.setState({
-			activeModal: null,
-			modalHistory: []
-		});
-	}
-
-
-	__buildModals() {
-		const modals = this.props.modals || [];
-		if (modals.length === 0) return null;
-
-		const { activeModal, modalParams } = this.state;
-		const { hideModal, navigatorObject } = this;
-		const { platform } = this.props;
-
-		return (
-			<ModalRoot
-				activeModal={activeModal}
-				children={
-					React.Children.map(modals, (Child) => (
-						React.cloneElement(Child, {
-							...Child.props,
-							onClose: hideModal,
-							header: (
-								<ModalPageHeader
-									left={(platform === ANDROID) && <HeaderButton onClick={hideModal} children={<Icon24Cancel/>}/>}
-									right={(platform === IOS)  && <HeaderButton onClick={hideModal} children={<Icon24Dismiss/>}/>}
-									children={Child.props.title || ""}
-								/>
-							),
-							navigator: {
-								...navigatorObject,
-								params: Child.props.id === activeModal ? modalParams : {}
-							}
-						})
-					))
-				}
-			/>
-		);
-	};
-
-	popBack() {
-		this.goBack(true);
+		hideModal();
 	}
 
 	componentDidMount() {
@@ -257,7 +191,6 @@ class Page extends React.Component {
 		const { id, children } = this.props;
 		const { activePanel, history, popout, params } = this.state;
 		const { goBack, navigatorObject } = this;
-		const modal = this.__buildModals();
 
 		return (
 			<View
@@ -265,7 +198,6 @@ class Page extends React.Component {
 				activePanel={activePanel}
 				history={history}
 				popout={popout}
-				modal={modal}
 				onSwipeBack={goBack}
 			>
 				{React.Children.map(children, (Child) =>
@@ -284,7 +216,7 @@ class Page extends React.Component {
 
 Page.propTypes = {
 	id: PropTypes.string.isRequired,
-	homePanel: PropTypes.string.isRequired,
+	activePanel: PropTypes.string.isRequired,
 	children: PropTypes.any
 };
 
@@ -292,4 +224,4 @@ PropTypes.defaultProps = {
 	children: []
 };
 
-export default withPlatform(Page);
+export default Page;
