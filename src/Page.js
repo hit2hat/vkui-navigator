@@ -34,7 +34,7 @@ class Page extends React.Component {
 			goPage: this.goPage,
 			goBack: window.history.back.bind(window.history),
 			showModal: this.showModal,
-			hideModal: window.history.back.bind(window.history),
+			hideModal: () => window.history.back,
 			showPopout: this.showPopout,
 			showLoader: this.showLoader,
 			hideLoader: this.hideLoader,
@@ -61,8 +61,6 @@ class Page extends React.Component {
 			activePanel: newPanel,
 			history: [ ...history, newPanel ],
 			popout: null,
-			activeModal: null,
-			modalParams: {},
 			params
 		});
 	}
@@ -190,7 +188,7 @@ class Page extends React.Component {
 	render() {
 		const { id, children } = this.props;
 		const { activePanel, history, popout, params } = this.state;
-		const { goBack, navigatorObject } = this;
+		const { navigatorObject } = this;
 
 		return (
 			<View
@@ -198,7 +196,7 @@ class Page extends React.Component {
 				activePanel={activePanel}
 				history={history}
 				popout={popout}
-				onSwipeBack={goBack}
+				onSwipeBack={window.history.back.bind(window.history)}
 			>
 				{React.Children.map(children, (Child) =>
 					React.cloneElement(Child, {
