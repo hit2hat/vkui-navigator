@@ -182,7 +182,9 @@ class Page extends React.Component {
 	}
 
 	componentWillUnmount() {
+		const { history } = this.state;
 		window.removeEventListener("popstate", this.popBack);
+		history.forEach(() => window.history.back());
 	}
 
 	render() {
