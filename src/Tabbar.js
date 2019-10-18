@@ -42,7 +42,7 @@ class NTabbar extends React.Component {
 	}
 
 	render() {
-		const { id, children, showModal, hideModal, goPage, isModalOpen } = this.props;
+		const { id, children, showModal, hideModal, goPage, isModalOpen, pageParams } = this.props;
 		const { activeStory } = this.state;
 		const { __buildBar } = this;
 
@@ -54,7 +54,8 @@ class NTabbar extends React.Component {
 						goPage,
 						showModal,
 						hideModal,
-						isModalOpen
+						isModalOpen,
+						pageParams
 					})
 				)}
 			</Epic>

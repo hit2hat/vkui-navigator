@@ -190,7 +190,7 @@ class Page extends React.Component {
 	}
 
 	render() {
-		const { id, children } = this.props;
+		const { id, children, pageParams } = this.props;
 		const { activePanel, history, popout, params } = this.state;
 		const { navigatorObject } = this;
 
@@ -207,7 +207,7 @@ class Page extends React.Component {
 						id: Child.props.id,
 						navigator: {
 							...navigatorObject,
-							params: Child.props.id === activePanel ? params : {}
+							params: Child.props.id === activePanel ? { ...params, pageParams } : {}
 						}
 					})
 				)}

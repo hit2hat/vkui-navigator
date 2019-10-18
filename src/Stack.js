@@ -21,7 +21,8 @@ class Stack extends React.Component {
 			activePage: props.activePage,
 			activeModal: null,
 			modalHistory: [],
-			modalParams: {}
+			modalParams: {},
+			pageParams: {}
 		};
 
 		this.goPage = this.goPage.bind(this);
@@ -38,10 +39,11 @@ class Stack extends React.Component {
 	/*
 		Функция для перехода между Page (View)
 	 */
-	goPage(newPage) {
+	goPage(newPage, params={}) {
 		vkConnect.send("VKWebAppDisableSwipeBack", {});
 		this.setState({
-			activePage: newPage
+			activePage: newPage,
+			pageParams: params
 		});
 	}
 
@@ -107,7 +109,7 @@ class Stack extends React.Component {
 	};
 
 	render() {
-		const { activePage, activeModal } = this.state;
+		const { activePage, activeModal, pageParams } = this.state;
 		const { showModal, hideModal, goPage } = this;
 		const { children, modal } = this.props;
 
@@ -122,7 +124,8 @@ class Stack extends React.Component {
 							showModal,
 							hideModal,
 							goPage,
-							isModalOpen: activeModal !== null
+							isModalOpen: activeModal !== null,
+							pageParams
 						})
 					)}
 				</Root>

@@ -82,7 +82,7 @@ ___
 Название | Тип | Описание |
 ------ | ------ | ------ |
 `go(id:String, params={})` | func | Переход на панель с идентификатором `id`|
-`goPage(id:String)` | func | Переходит на другу страницу Page (из Stack) |
+`goPage(id:String, params={})` | func | Переходит на другу страницу Page (из Stack) |
 `goBack` | func | Возвращает на одну панель назад  |
 `showModal(id:String, params={})` | func | Показывает модальное окно с идентификатором `id`|
 `hideModal` | func | Скрывает все активные модальные окна |
