@@ -100,7 +100,7 @@ const Panel1 = ({ id, navigator }) => (
     <Panel id={id}>
         <PanelHeader>
             Панель 1
-        <PanelHeader/>
+        </PanelHeader>
         <Group>
             <Button onClick={() => navigator.go("panel2")}>
                 Вперед
@@ -113,7 +113,7 @@ const Panel2 = ({ id, navigator }) => (
     <Panel id={id}>
         <PanelHeader>
             Панель 2
-        <PanelHeader/>
+        </PanelHeader>
         <Group>
             <Button onClick={() => navigator.goBack()}>
                 Назад
