@@ -92,8 +92,8 @@ class Stack extends React.Component {
 							onClose: window.history.back.bind(window.history),
 							header: (
 								<ModalPageHeader
-									left={(platform === ANDROID) && <HeaderButton onClick={hideModal} children={<Icon24Cancel/>}/>}
-									right={(platform === IOS)  && <HeaderButton onClick={hideModal} children={<Icon24Dismiss/>}/>}
+									left={(platform === ANDROID) && <HeaderButton onClick={window.history.back.bind(window.history)} children={<Icon24Cancel/>}/>}
+									right={(platform === IOS)  && <HeaderButton onClick={window.history.back.bind(window.history)} children={<Icon24Dismiss/>}/>}
 									children={Child.props.title || ""}
 								/>
 							),
