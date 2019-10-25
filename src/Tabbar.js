@@ -27,7 +27,7 @@ class NTabbar extends React.Component {
 
 		return (
 			<Tabbar>
-				{items.map((Child, key) => (
+				{React.Children.map(items, (Child, key) => (
 					<TabbarItem
 						key={key}
 						onClick={goStory}
