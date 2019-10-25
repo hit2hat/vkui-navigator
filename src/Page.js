@@ -207,7 +207,7 @@ class Page extends React.Component {
 	}
 
 	render() {
-		const { id, children, pageParams } = this.props;
+		const { id, children, pageParams, header } = this.props;
 		const { activePanel, history, popout, params } = this.state;
 		const { navigatorObject } = this;
 
@@ -217,6 +217,7 @@ class Page extends React.Component {
 				activePanel={activePanel}
 				history={history}
 				popout={popout}
+				header={header}
 				onSwipeBack={window.history.back.bind(window.history)}
 			>
 				{React.Children.map(children, (Child) =>
@@ -236,7 +237,8 @@ class Page extends React.Component {
 Page.propTypes = {
 	id: PropTypes.string.isRequired,
 	activePanel: PropTypes.string.isRequired,
-	children: PropTypes.any
+	children: PropTypes.any,
+	header: PropTypes.bool
 };
 
 PropTypes.defaultProps = {
