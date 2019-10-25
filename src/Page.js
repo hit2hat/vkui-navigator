@@ -28,6 +28,7 @@ class Page extends React.Component {
 		this.showLoader = this.showLoader.bind(this);
 		this.hideLoader = this.hideLoader.bind(this);
 		this.showDialog = this.showDialog.bind(this);
+		this.showAlert = this.showAlert.bind(this);
 
 		this.navigatorObject = {
 			go: this.go,
@@ -38,7 +39,8 @@ class Page extends React.Component {
 			showPopout: this.showPopout,
 			showLoader: this.showLoader,
 			hideLoader: this.hideLoader,
-			showDialog: this.showDialog
+			showDialog: this.showDialog,
+			showAlert: this.showAlert
 		};
 	}
 
@@ -136,6 +138,21 @@ class Page extends React.Component {
 						style: "cancel"
 					}
 				]}
+				onClose={() => this.showPopout(null)}
+			>
+				<h2>{title}</h2>
+				<p>{description}</p>
+			</Alert>
+		);
+	}
+	showAlert({ title, description }) {
+		this.showPopout(
+			<Alert
+				actions={[{
+					title: 'Отмена',
+					autoclose: true,
+					style: 'cancel'
+				}]}
 				onClose={() => this.showPopout(null)}
 			>
 				<h2>{title}</h2>
