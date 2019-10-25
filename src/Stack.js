@@ -79,7 +79,7 @@ class Stack extends React.Component {
 		if (modals.length === 0) return null;
 
 		const { activeModal, modalParams } = this.state;
-		const { hideModal, navigatorObject } = this;
+		const { navigatorObject } = this;
 		const { platform } = this.props;
 
 		return (
