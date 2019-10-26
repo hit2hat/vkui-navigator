@@ -199,12 +199,15 @@ class Page extends React.Component {
 	}
 
 	getDerivedStateFromProps(nextProps) {
-		const { activePanel, history } = this.state;
+		const { activePanel } = this.state;
 
 		if (nextProps.activePanel !== activePanel) {
 			this.setState({ activePanel: nextProps.activePanel });
 		}
+	}
 
+	componentWillUnmount() {
+		const { history } = this.state;
 		window.removeEventListener("popstate", this.popBack);
 		for(let i = 0; i < history.length - 1; i++) {
 			window.history.back()
