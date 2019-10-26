@@ -198,6 +198,12 @@ class Page extends React.Component {
 		window.history.replaceState({ panel: homePanel }, homePanel);
 	}
 
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		if (nextProps.activePanel !== this.state.activePanel) {
+		  this.setState({ activePanel: nextProps.activePanel });
+		}
+	  }
+
 	componentWillUnmount() {
 		const { history } = this.state;
 		window.removeEventListener("popstate", this.popBack);
@@ -210,7 +216,7 @@ class Page extends React.Component {
 		const { id, children, pageParams, header } = this.props;
 		const { activePanel, history, popout, params } = this.state;
 		const { navigatorObject } = this;
-
+		
 		return (
 			<View
 				id={id}
