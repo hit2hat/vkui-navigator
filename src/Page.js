@@ -203,7 +203,7 @@ class Page extends React.Component {
 
 		if (props.activePanel !== activePanel) {
 			return {
-				activePanel 
+				activePanel: props.activePanel
 			};
 		} else return null
 	}
