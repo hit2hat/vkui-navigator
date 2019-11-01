@@ -149,7 +149,7 @@ class Page extends React.Component {
 		this.showPopout(
 			<Alert
 				actions={[{
-					title: 'Отмена',
+					title: 'Закрыть',
 					autoclose: true,
 					style: 'cancel'
 				}]}
