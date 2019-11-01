@@ -198,12 +198,14 @@ class Page extends React.Component {
 		window.history.replaceState({ panel: homePanel }, homePanel);
 	}
 
-	getDerivedStateFromProps(nextProps) {
-		const { activePanel } = this.state;
+	static getDerivedStateFromProps(props, state) {
+		const { activePanel } = state;
 
-		if (nextProps.activePanel !== activePanel) {
-			this.setState({ activePanel: nextProps.activePanel });
-		}
+		if (props.activePanel !== activePanel) {
+			return {
+				activePanel 
+			};
+		} else return null
 	}
 
 	componentWillUnmount() {

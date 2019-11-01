@@ -108,12 +108,14 @@ class Stack extends React.Component {
 		);
 	};
 
-	getDerivedStateFromProps(nextProps) {
-		const { activePage } = this.state;
+	static getDerivedStateFromProps(props, state) {
+		const { activePage } = state;
 
-		if (nextProps.activePage !== activePage) {
-			this.setState({ activePage: nextProps.activePage });
-		}
+		if (props.activePage !== activePage) {
+			return {
+				activePage
+			};
+		} else return null;
 	}
 
 	render() {
