@@ -1,6 +1,6 @@
 {
   "name": "vkui-navigator",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "navigation module for vkui",
   "main": "src/index.js",
   "repository": "https://github.com/hit2hat/vkui-navigator.git",
