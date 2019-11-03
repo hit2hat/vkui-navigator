@@ -41,12 +41,14 @@ class NTabbar extends React.Component {
 		);
 	}
 
-	getDerivedStateFromProps(nextProps) {
-		const { activeStory } = this.state;
+	static getDerivedStateFromProps(props, state) {
+		const { activeStory } = state;
 
-		if (nextProps.activeStory !== activeStory) {
-			this.setState({ activeStory: nextProps.activeStory });
-		}
+		if (props.activeStory !== activeStory) {
+			return {
+				activeStory
+			};
+		} else return null;
 	}
 
 	render() {
