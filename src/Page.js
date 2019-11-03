@@ -198,16 +198,6 @@ class Page extends React.Component {
 		window.history.replaceState({ panel: homePanel }, homePanel);
 	}
 
-	static getDerivedStateFromProps(props, state) {
-		const { activePanel } = state;
-
-		if (props.activePanel !== activePanel) {
-			return {
-				activePanel: props.activePanel
-			};
-		} else return null
-	}
-
 	componentWillUnmount() {
 		const { history } = this.state;
 		window.removeEventListener("popstate", this.popBack);
