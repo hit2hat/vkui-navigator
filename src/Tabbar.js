@@ -35,6 +35,7 @@ class NTabbar extends React.Component {
 						data-story={Child.props.id}
 						text={Child.props.title || ""}
 						children={Child.props.icon || null}
+						label={Child.props.label || ""}
 					/>
 				))}
 			</Tabbar>
