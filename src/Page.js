@@ -15,7 +15,8 @@ class Page extends React.Component {
 			homePanel: props.activePanel,
 			history: [ props.activePanel ],
 			popout: null,
-			params: {}
+			params: {},
+			header: props.header
 		};
 
 
@@ -29,6 +30,7 @@ class Page extends React.Component {
 		this.hideLoader = this.hideLoader.bind(this);
 		this.showDialog = this.showDialog.bind(this);
 		this.showAlert = this.showAlert.bind(this);
+		this.headerVisible = this.headerVisible.bind(this);
 
 		this.navigatorObject = {
 			go: this.go,
@@ -40,7 +42,8 @@ class Page extends React.Component {
 			showLoader: this.showLoader,
 			hideLoader: this.hideLoader,
 			showDialog: this.showDialog,
-			showAlert: this.showAlert
+			showAlert: this.showAlert,
+			headerVisible: this.headerVisible
 		};
 	}
 
@@ -190,6 +193,10 @@ class Page extends React.Component {
 		hideModal();
 	}
 
+	headerVisible(newValue) {
+		this.setState({ header: newValue });
+	}
+
 	componentDidMount() {
 		const { homePanel } = this.state;
 
@@ -207,8 +214,8 @@ class Page extends React.Component {
 	}
 
 	render() {
-		const { id, children, pageParams, header } = this.props;
-		const { activePanel, history, popout, params } = this.state;
+		const { id, children, pageParams } = this.props;
+		const { activePanel, history, popout, params, header } = this.state;
 		const { navigatorObject } = this;
 
 		return (

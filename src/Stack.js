@@ -111,24 +111,31 @@ class Stack extends React.Component {
 	render() {
 		const { activePage, activeModal, pageParams } = this.state;
 		const { showModal, hideModal, goPage } = this;
-		const { children, modal } = this.props;
+		const { children, modal, disabledConfigProvider } = this.props;
 
 		const modals = this.__buildModals(modal);
+		const root = (
+			<Root activeView={activePage} modal={modals}>
+				{React.Children.map(children, (Child) =>
+					React.cloneElement(Child, {
+						id: Child.props.id,
+						showModal,
+						hideModal,
+						goPage,
+						isModalOpen: activeModal !== null,
+						pageParams
+					})
+				)}
+			</Root>
+		);
+
+		if (disabledConfigProvider) {
+			return root;
+		}
 
 		return (
 			<ConfigProvider isWebView>
-				<Root activeView={activePage} modal={modals}>
-					{React.Children.map(children, (Child) =>
-						React.cloneElement(Child, {
-							id: Child.props.id,
-							showModal,
-							hideModal,
-							goPage,
-							isModalOpen: activeModal !== null,
-							pageParams
-						})
-					)}
-				</Root>
+				{root}
 			</ConfigProvider>
 		);
 	}
