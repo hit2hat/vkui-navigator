@@ -2,14 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import vkConnect from "@vkontakte/vk-connect";
 
-import ConfigProvider from "@vkontakte/vkui/dist/components/ConfigProvider/ConfigProvider";
-import Root from "@vkontakte/vkui/dist/components/Root/Root";
+import {Root, ModalRoot, ModalPageHeader, ConfigProvider, PanelHeaderButton, withPlatform, ANDROID, IOS} from "@vkontakte/vkui";
 
-import ModalRoot from "@vkontakte/vkui/dist/components/ModalRoot/ModalRoot";
-import ModalPageHeader from "@vkontakte/vkui/dist/components/ModalPageHeader/ModalPageHeader";
-import HeaderButton from "@vkontakte/vkui/dist/components/HeaderButton/HeaderButton";
-
-import { withPlatform, ANDROID, IOS } from "@vkontakte/vkui";
 import Icon24Cancel from "@vkontakte/icons/dist/24/cancel";
 import Icon24Dismiss from "@vkontakte/icons/dist/24/dismiss";
 
@@ -92,8 +86,8 @@ class Stack extends React.Component {
 							onClose: window.history.back.bind(window.history),
 							header: (
 								<ModalPageHeader
-									left={(platform === ANDROID) && <HeaderButton onClick={window.history.back.bind(window.history)} children={<Icon24Cancel/>}/>}
-									right={(platform === IOS)  && <HeaderButton onClick={window.history.back.bind(window.history)} children={<Icon24Dismiss/>}/>}
+									left={(platform === ANDROID) && <PanelHeaderButton onClick={window.history.back.bind(window.history)} children={<Icon24Cancel/>}/>}
+									right={(platform === IOS)  && <PanelHeaderButton onClick={window.history.back.bind(window.history)} children={<Icon24Dismiss/>}/>}
 									children={Child.props.title || ""}
 								/>
 							),
