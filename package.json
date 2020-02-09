@@ -10,9 +10,9 @@
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-react": "^7.6.3",
-    "@vkontakte/icons": "^1.10.2",
-    "@vkontakte/vk-connect": "^1.6.5",
-    "@vkontakte/vkui": "^2.31.0",
+    "@vkontakte/icons": "^1.15.10",
+    "@vkontakte/vk-connect": "^1.8.7",
+    "@vkontakte/vkui": "^3.0.2",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "rollup": "^1.23.1",
