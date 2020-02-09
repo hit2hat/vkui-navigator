@@ -1,9 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-import Epic from "@vkontakte/vkui/dist/components/Epic/Epic";
-import Tabbar from "@vkontakte/vkui/dist/components/Tabbar/Tabbar";
-import TabbarItem from "@vkontakte/vkui/dist/components/TabbarItem/TabbarItem";
+import {Epic, Tabbar, TabbarItem} from "@vkontakte/vkui";
 
 class NTabbar extends React.Component {
 	constructor(props) {
