@@ -105,7 +105,7 @@ class Stack extends React.Component {
 	render() {
 		const { activePage, activeModal, pageParams } = this.state;
 		const { showModal, hideModal, goPage } = this;
-		const { children, modal, disabledConfigProvider } = this.props;
+		const { children, modal, disabledConfigProvider, webviewType } = this.props;
 
 		const modals = this.__buildModals(modal);
 		const root = (
@@ -128,7 +128,10 @@ class Stack extends React.Component {
 		}
 
 		return (
-			<ConfigProvider isWebView>
+			<ConfigProvider
+				webviewType={webviewType}
+				isWebView
+			>
 				{root}
 			</ConfigProvider>
 		);
