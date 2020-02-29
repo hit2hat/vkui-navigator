@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import vkConnect from "@vkontakte/vk-connect";
+import VKBridge from "@vkontakte/vk-bridge";
 
 import {View, ScreenSpinner, Alert} from "@vkontakte/vkui";
 
@@ -56,7 +56,7 @@ class Page extends React.Component {
 		const { activePanel, homePanel, history } = this.state;
 
 		if (activePanel === homePanel) {
-			vkConnect.send("VKWebAppEnableSwipeBack", {});
+			VKBridge.send("VKWebAppEnableSwipeBack", {});
 		}
 
 		window.history.pushState({ panel: newPanel, modal: null }, newPanel);
@@ -92,7 +92,7 @@ class Page extends React.Component {
 
 		const newPanel = history[history.length - 2];
 		if (newPanel === homePanel) {
-			vkConnect.send("VKWebAppDisableSwipeBack", {});
+			VKBridge.send("VKWebAppDisableSwipeBack", {});
 		}
 
 		this.setState({
@@ -171,7 +171,7 @@ class Page extends React.Component {
 		const { showModal } = this.props;
 		const { activePanel } = this.state;
 
-		vkConnect.send("VKWebAppDisableSwipeBack", {});
+		VKBridge.send("VKWebAppDisableSwipeBack", {});
 		window.history.pushState({ panel: activePanel, modal: newModal }, activePanel);
 
 		showModal(newModal, params);
@@ -185,7 +185,7 @@ class Page extends React.Component {
 		const { activePanel, homePanel } = this.state;
 
 		if (activePanel !== homePanel) {
-			vkConnect.send("VKWebAppEnableSwipeBack", {});
+			VKBridge.send("VKWebAppEnableSwipeBack", {});
 		}
 
 		hideModal();
@@ -198,7 +198,7 @@ class Page extends React.Component {
 	componentDidMount() {
 		const { homePanel } = this.state;
 
-		vkConnect.send("VKWebAppDisableSwipeBack", {});
+		VKBridge.send("VKWebAppDisableSwipeBack", {});
 		window.addEventListener("popstate", this.popBack);
 		window.history.replaceState({ panel: homePanel }, homePanel);
 	}

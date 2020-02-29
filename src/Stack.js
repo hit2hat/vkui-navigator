@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import vkConnect from "@vkontakte/vk-connect";
+import VKBridge from "@vkontakte/vk-bridge";
 
 import {Root, ModalRoot, ModalPageHeader, ConfigProvider, PanelHeaderButton, withPlatform, ANDROID, IOS} from "@vkontakte/vkui";
 
@@ -34,7 +34,7 @@ class Stack extends React.Component {
 		Функция для перехода между Page (View)
 	 */
 	goPage(newPage, params={}) {
-		vkConnect.send("VKWebAppDisableSwipeBack", {});
+		VKBridge.send("VKWebAppDisableSwipeBack", {});
 		this.setState({
 			activePage: newPage,
 			pageParams: params
