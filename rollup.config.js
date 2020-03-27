@@ -6,13 +6,21 @@ import { terser } from "rollup-plugin-terser";
 const config = {
 	input: "src/index.js",
 	external: [
-		"react"
+		"react",
+		"prop-types",
+		"@vkontakte/icons",
+		"@vkontakte/vk-bridge",
+		"@vkontakte/vkui"
 	],
 	output: {
 		format: "umd",
 		name: "app",
 		globals: {
-			react: "React",
+			"react": "React",
+			"react-dom": "ReactDOM",
+			"prop-types": "PropTypes",
+			"@vkontakte/vk-bridge": "VKBridge",
+			"@vkontakte/vkui": "vkui"
 		}
 	},
 	plugins: [
