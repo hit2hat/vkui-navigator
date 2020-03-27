@@ -2,7 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import VKBridge from "@vkontakte/vk-bridge";
 
-import {View, ScreenSpinner, Alert} from "@vkontakte/vkui";
+import {
+	View,
+	ScreenSpinner,
+	Alert
+} from "@vkontakte/vkui";
 
 class Page extends React.Component {
 	constructor(props) {

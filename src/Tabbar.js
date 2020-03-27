@@ -1,6 +1,10 @@
 import React from "react";
 
-import {Epic, Tabbar, TabbarItem} from "@vkontakte/vkui";
+import {
+	Epic,
+	Tabbar,
+	TabbarItem
+} from "@vkontakte/vkui";
 
 class NTabbar extends React.Component {
 	constructor(props) {

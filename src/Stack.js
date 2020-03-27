@@ -2,7 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import VKBridge from "@vkontakte/vk-bridge";
 
-import {Root, ModalRoot, ModalPageHeader, ConfigProvider, PanelHeaderButton, withPlatform, ANDROID, IOS} from "@vkontakte/vkui";
+import {
+	Root,
+	ModalRoot,
+	ModalPageHeader,
+	PanelHeaderButton,
+	withPlatform,
+	ANDROID,
+	IOS,
+	ConfigProviderContext
+} from "@vkontakte/vkui";
 
 import Icon24Cancel from "@vkontakte/icons/dist/24/cancel";
 import Icon24Dismiss from "@vkontakte/icons/dist/24/dismiss";
@@ -105,7 +114,7 @@ class Stack extends React.Component {
 	render() {
 		const { activePage, activeModal, pageParams } = this.state;
 		const { showModal, hideModal, goPage } = this;
-		const { children, modal, disabledConfigProvider, webviewType } = this.props;
+		const { children, modal, disabledConfigProvider, webviewType, scheme } = this.props;
 
 		const modals = this.__buildModals(modal);
 		const root = (
@@ -128,18 +137,24 @@ class Stack extends React.Component {
 		}
 
 		return (
-			<ConfigProvider
+			<ConfigProviderContext
 				webviewType={webviewType}
 				isWebView
+				scheme={scheme}
 			>
-				{root}
-			</ConfigProvider>
+					{root}
+			</ConfigProviderContext>
 		);
 	}
 }
 
 Stack.propTypes = {
-	activePage: PropTypes.string.isRequired
+	activePage: PropTypes.string.isRequired,
+	scheme: PropTypes.string.isRequired
+};
+
+Stack.defaultProps = {
+	scheme: "bright_light"
 };
 
 export default withPlatform(Stack);
