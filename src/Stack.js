@@ -7,10 +7,10 @@ import {
 	ModalRoot,
 	ModalPageHeader,
 	PanelHeaderButton,
+	ConfigProvider,
 	withPlatform,
 	ANDROID,
-	IOS,
-	ConfigProviderContext
+	IOS
 } from "@vkontakte/vkui";
 
 import Icon24Cancel from "@vkontakte/icons/dist/24/cancel";
@@ -137,13 +137,13 @@ class Stack extends React.Component {
 		}
 
 		return (
-			<ConfigProviderContext
+			<ConfigProvider
 				webviewType={webviewType}
 				isWebView
 				scheme={scheme}
 			>
 					{root}
-			</ConfigProviderContext>
+			</ConfigProvider>
 		);
 	}
 }
