@@ -9,12 +9,14 @@
   "repository": "https://github.com/hit2hat/vkui-navigator.git",
   "author": "hit2hat <hit2hat@icloud.com>",
   "license": "MIT",
+  "peerDependencies": {
+    "@vkontakte/icons": "^1.41.1",
+    "@vkontakte/vk-bridge": "^2.3.0",
+    "@vkontakte/vkui": "^3.12.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-react": "^7.6.3",
-    "@vkontakte/icons": "^1.41.1",
-    "@vkontakte/vk-bridge": "^2.3.0",
-    "@vkontakte/vkui": "^3.12.1",
     "react": "^16.13.1",
     "rollup": "^1.23.1",
     "rollup-plugin-babel": "^4.3.3",
