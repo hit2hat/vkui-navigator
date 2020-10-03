@@ -2,18 +2,19 @@
   "name": "vkui-navigator",
   "version": "1.4.8",
   "description": "Navigation module for VKUI",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c -o dist/index.js"
+  },
   "repository": "https://github.com/hit2hat/vkui-navigator.git",
   "author": "hit2hat <hit2hat@icloud.com>",
   "license": "MIT",
-  "private": false,
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-react": "^7.6.3",
-    "@vkontakte/icons": "^1.28.0",
-    "@vkontakte/vk-bridge": "^2.2.2",
-    "@vkontakte/vkui": "^3.11.6",
-    "prop-types": "^15.7.2",
+    "@vkontakte/icons": "^1.41.1",
+    "@vkontakte/vk-bridge": "^2.3.0",
+    "@vkontakte/vkui": "^3.12.1",
     "react": "^16.13.1",
     "rollup": "^1.23.1",
     "rollup-plugin-babel": "^4.3.3",
@@ -22,8 +23,5 @@
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-uglify-es": "^0.0.1"
-  },
-  "scripts": {
-    "build": "rollup -c -o dist/index.js"
   }
 }

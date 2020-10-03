@@ -1,9 +1,7 @@
 <div align="center">
   <a href="https://github.com/VKCOM">
-    <img width="100" height="100" src="https://avatars3.githubusercontent.com/u/1478241?s=200&v=4" alt="VK Logo"/>
+    <img src="https://camo.githubusercontent.com/8968dddef792b7ec783137da9cd3779a0ba7dde2/68747470733a2f2f766b2e636f6d2f696d616765732f617070732f6d696e695f617070732f766b5f6d696e695f617070735f6c6f676f2e737667" alt="VK Logo"/>
   </a>
-  <br>
-  <br>
 </div>
 
 # VKUI Navigator
@@ -21,7 +19,7 @@
 
 ## Быстрый старт 🚀
 ```javascript
-import { Stack, Page } from "vkui-navigator/dist";
+import { Stack, Page } from "vkui-navigator";
 
 // simple usage
 <Stack activePage="page1">

@@ -20,6 +20,7 @@ const config = {
 			"react-dom": "ReactDOM",
 			"prop-types": "PropTypes",
 			"@vkontakte/vk-bridge": "VKBridge",
+			"@vkontakte/icons": "icons",
 			"@vkontakte/vkui": "vkui"
 		}
 	},

@@ -1,6 +1,6 @@
-import Stack from "./Stack";
-import Page from "./Page";
-import Tabbar from "./Tabbar";
+import { Stack } from "./Stack.jsx";
+import { Page } from "./Page.jsx";
+import Tabbar from "./Tabbar.jsx";
 
 export {
 	Stack,
