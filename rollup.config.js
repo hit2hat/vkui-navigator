@@ -7,7 +7,6 @@ const config = {
 	input: "src/index.js",
 	external: [
 		"react",
-		"prop-types",
 		"@vkontakte/icons",
 		"@vkontakte/vk-bridge",
 		"@vkontakte/vkui"

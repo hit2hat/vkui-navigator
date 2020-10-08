@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import VKBridge from "@vkontakte/vk-bridge";
 
 import { View, ScreenSpinner, Alert } from "@vkontakte/vkui";
@@ -6,12 +6,12 @@ import { View, ScreenSpinner, Alert } from "@vkontakte/vkui";
 /**
  * @description Основная единица модуля. Включает в себя логику навигации между панелями
  * @param {string} activePanel - Идентификатор начальной панели
- * @param {boolean} header=true - Показыть PanelHeader
+ * @param {boolean} header=true - Показывать PanelHeader
  * @param children
  */
 export function Page({ activePanel: activePagePanel, header: visiblePageHeader = true, goPage, isModalOpen, showModal: showPageModal, hideModal: hidePageModal, id, children = [], pageParams }) {
 
-	const [{ activePanel, homePanel, history, popout, params, header }, setPage] = useReducer((state, updatedState) => {
+	const [{ activePanel, homePanel, history, popout, params, header }, setPage] = React.useReducer((state, updatedState) => {
 		return {
 			...state,
 			...updatedState
@@ -176,7 +176,7 @@ export function Page({ activePanel: activePagePanel, header: visiblePageHeader =
 		});
 	};
 
-	useEffect(() => {
+	React.useEffect(() => {
 		VKBridge.send("VKWebAppDisableSwipeBack", {});
 		window.addEventListener("popstate", popBack);
 		window.history.replaceState({

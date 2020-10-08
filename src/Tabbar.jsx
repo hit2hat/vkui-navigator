@@ -1,10 +1,15 @@
-import React, { useReducer } from "react";
+import React from "react";
 
 import { Epic, Tabbar, TabbarItem } from "@vkontakte/vkui";
 
+/**
+ * @description Умный таббар
+ * @param {string} id - Идентификатор, который передается Epic внутри компонента
+ * @param {string} activeStory - Идентификатор начальной страницы (Page)
+ */
 export default function NTabbar({ activeStory: activeTabbarStory, id, children, showModal, hideModal, goPage, isModalOpen, pageParams }) {
 
-	const [{ activeStory }, setTabbar] = useReducer((state, updatedState) => {
+	const [{ activeStory }, setTabbar] = React.useReducer((state, updatedState) => {
 		return {
 			...state,
 			...updatedState

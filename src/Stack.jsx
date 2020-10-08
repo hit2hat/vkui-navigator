@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import VKBridge from "@vkontakte/vk-bridge";
 
 import { Root, ModalRoot, ModalPageHeader, PanelHeaderButton, ConfigProvider, ANDROID, IOS, platform } from "@vkontakte/vkui";
@@ -20,7 +20,7 @@ import { Icon24Cancel, Icon24Dismiss } from "@vkontakte/icons";
 
 export function Stack({ activePage: activeStackPage, modals = [], children, modal, disabledConfigProvider, webviewType, scheme, isWebView, transitionMotionEnabled, appearance }) {
 
-    const [{ modalHistory, activeModal, modalParams, activePage, pageParams }, setStack] = useReducer((state, updatedState) => {
+    const [{ modalHistory, activeModal, modalParams, activePage, pageParams }, setStack] = React.useReducer((state, updatedState) => {
         return {
             ...state,
             ...updatedState
